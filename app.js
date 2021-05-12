@@ -62,7 +62,7 @@ const appendToFile = (data) => {
 const copyFile = (fileName) => {
   fs.copyFile(`${fileName}`, `copy_of_${fileName}`, (err) => {
     if (err) throw err;
-    console.log("done");
+    // console.log("done");
   });
 };
 copyFile("data.txt");
@@ -80,7 +80,7 @@ const createPost = (post) => {
   axios
     .post("https://jsonplaceholder.typicode.com/posts", post)
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
     })
     .catch((err) => {
       throw err;
@@ -101,7 +101,7 @@ const updatePost = (id, data) => {
   axios
     .put(`https://jsonplaceholder.typicode.com/todos/${id}`, data)
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
     })
     .catch((err) => {
       throw err;
@@ -116,7 +116,8 @@ const getUsers = async () => {
     let response = await axios.get(
       "https://jsonplaceholder.typicode.com/users"
     );
-    console.log(response);
+    // console.log(response.data);
+
   } catch (err) {
     throw err;
   }
@@ -132,11 +133,16 @@ const saveUsers = async () => {
     let response = await axios.get(
       "https://jsonplaceholder.typicode.com/users"
     );
-    fs.appendFile("users.txt",JSON.stringify(response), (err) => {
-           if (err) throw err;
+   
+    fs.appendFile("users.txt",JSON.stringify(response.data) , (err) => {
+           if (err) throw err
+           console.log("savee");;
        })
   } catch (err) {
     throw err;
   }
 };
 saveUsers()
+
+
+
